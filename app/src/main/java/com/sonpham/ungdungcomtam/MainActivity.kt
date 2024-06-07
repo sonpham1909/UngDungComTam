@@ -18,8 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.sonpham.ungdungcomtam.ui.Login.Login
 import com.sonpham.ungdungcomtam.ui.theme.UngDungComTamTheme
 import kotlinx.coroutines.delay
 
@@ -29,7 +30,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             UngDungComTamTheme {
-                Background()
+                AppNavHost()
+
 
             }
         }
@@ -37,13 +39,13 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@Preview
+
 @Composable
-fun Background(){
+fun Background(navController: NavHostController){
 
     val context = LocalContext.current
 
-   val intent = Intent(context,Login::class.java)
+   val intent = Intent(context, Login::class.java)
 
     LaunchedEffect(key1 = true) {
         delay(3000)

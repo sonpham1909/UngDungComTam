@@ -13,13 +13,13 @@
         android:theme="@style/Theme.UngDungComTam"
         tools:targetApi="31">
         <activity
-            android:name=".Home"
+            android:name=".ui.Home.Home"
             android:exported="false" />
         <activity
-            android:name=".Signup"
+            android:name=".ui.Login.Signup"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".ui.Login.Login"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

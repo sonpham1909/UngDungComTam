@@ -1,4 +1,4 @@
-package com.sonpham.ungdungcomtam
+package com.sonpham.ungdungcomtam.ui.Login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

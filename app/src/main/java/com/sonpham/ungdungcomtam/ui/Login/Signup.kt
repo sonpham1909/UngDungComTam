@@ -1,4 +1,4 @@
-package com.sonpham.ungdungcomtam
+package com.sonpham.ungdungcomtam.ui.Login
 
 import android.content.Intent
 import android.os.Bundle
@@ -44,6 +44,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.sonpham.ungdungcomtam.R
 import com.sonpham.ungdungcomtam.ui.theme.UngDungComTamTheme
 
 class Signup : ComponentActivity() {

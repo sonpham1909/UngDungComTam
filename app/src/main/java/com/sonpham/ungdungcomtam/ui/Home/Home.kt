@@ -1,6 +1,5 @@
-package com.sonpham.ungdungcomtam
+package com.sonpham.ungdungcomtam.ui.Home
 
-import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -24,12 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.sonpham.ungdungcomtam.R
 import com.sonpham.ungdungcomtam.ui.theme.UngDungComTamTheme
 
 class Home : ComponentActivity() {
