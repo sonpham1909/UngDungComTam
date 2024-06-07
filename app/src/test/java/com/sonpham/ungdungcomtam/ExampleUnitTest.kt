@@ -1,4 +1,4 @@
-package com.example.ungdungcomtam
+package com.sonpham.ungdungcomtam
 
 import org.junit.Test
 

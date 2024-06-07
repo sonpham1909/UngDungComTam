@@ -1,4 +1,4 @@
-package com.example.ungdungcomtam.ui.theme
+package com.sonpham.ungdungcomtam.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

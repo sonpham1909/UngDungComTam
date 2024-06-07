@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "147877490313",
+    "project_id": "appcomtam",
+    "storage_bucket": "appcomtam.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:147877490313:android:a9a3e8fb8231040cfb6058",
+        "android_client_info": {
+          "package_name": "com.example.ungdungcomtam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUkRJtnBTTuJdBBhRVjx6yHh834_Mt4k0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
