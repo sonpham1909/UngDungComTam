@@ -9,6 +9,7 @@ import com.sonpham.ungdungcomtam.dao.CategoryDao
 import com.sonpham.ungdungcomtam.model.Category
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Database(entities = [Category::class], version = 1)
@@ -37,6 +38,9 @@ abstract class CategoryDB: RoomDatabase() {
                                 val categoryDao = INTANCE?.productDao()
                                 categoryDao?.insertCategory(Category(nameCategory = "Category 1"))
                                 categoryDao?.insertCategory(Category(nameCategory = "Category 2"))
+                                delay(2000)
+                                // Truy vấn dữ liệu và cập nhật UI
+                                val categories = categoryDao?.getAllCategories()
                                 // Thêm các dòng dữ liệu khác tùy thuộc vào nhu cầu của bạn
                             }
                         }

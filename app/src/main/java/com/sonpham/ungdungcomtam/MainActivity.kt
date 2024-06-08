@@ -45,11 +45,14 @@ fun Background(navController: NavHostController){
 
     val context = LocalContext.current
 
-   val intent = Intent(context, Login::class.java)
+
 
     LaunchedEffect(key1 = true) {
         delay(3000)
-        context.startActivity(intent)
+       navController.navigate(Screen.Login.name){
+           popUpTo(Screen.Main.name){inclusive=true}
+       }
+
         
     }
 

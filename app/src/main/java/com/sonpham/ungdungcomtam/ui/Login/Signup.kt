@@ -44,47 +44,44 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.sonpham.ungdungcomtam.R
+import com.sonpham.ungdungcomtam.Screen
 import com.sonpham.ungdungcomtam.ui.theme.UngDungComTamTheme
 
-class Signup : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent{
-            UngDungComTamTheme {
-                val authViewModel: AuthViewModel = AuthViewModel()
-                SignupScreen(
-                    onRegisterClick = { email, pass ->
-                        authViewModel.register(email, pass) { success, error ->
-                            if (success) {
-                                // Xử lý khi đăng ký thành công
-                                // Chuyển sang màn hình đăng nhập
-                                val intent = Intent(this, Login::class.java)
-                                Toast.makeText(this, error ?: "Đăng ký thành công", Toast.LENGTH_SHORT).show()
-                                startActivity(intent)
-                                finish() // Đóng màn hình đăng ký
-
-
-                            } else {
-                                // Xử lý khi đăng ký thất bại\
-                                Toast.makeText(this, error ?: "Đăng ký thất bại", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                )
-
-
-
-
-
-            }
-        }
-    }
-}
 
 @Composable
+fun SignupAll(navController: NavController){
+    val context = LocalContext.current
+    val authViewModel: AuthViewModel = AuthViewModel()
+    SignupScreen(
+        onRegisterClick = { email, pass ->
+            authViewModel.register(email, pass) { success, error ->
+                if (success) {
+                    // Xử lý khi đăng ký thành công
+                    // Chuyển sang màn hình đăng nhập
+
+                    Toast.makeText(context, error ?: "Đăng ký thành công", Toast.LENGTH_SHORT).show()
+                    navController.navigate(Screen.Login.name)
+
+
+                } else {
+                    // Xử lý khi đăng ký thất bại\
+                    Toast.makeText(context, error ?: "Đăng ký thất bại", Toast.LENGTH_SHORT).show()
+                }
+            }
+        },
+        goBack = {
+            navController.navigate(Screen.Login.name)
+        }
+
+    )
+
+}
+@Composable
 fun SignupScreen(
-    onRegisterClick: (String, String) -> Unit
+    onRegisterClick: (String, String) -> Unit,
+    goBack: ()-> Unit
 ) {
     val context = LocalContext.current
     val intent = Intent(context, Login::class.java)
@@ -229,7 +226,7 @@ fun SignupScreen(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .clickable {
-                    context.startActivity(intent)
+                 goBack()
                 },
             style = TextStyle(textDecoration = TextDecoration.Underline)
         )

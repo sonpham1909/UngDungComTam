@@ -26,22 +26,16 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.sonpham.ungdungcomtam.R
+import com.sonpham.ungdungcomtam.ui.Manager.ProfileScreen
 import com.sonpham.ungdungcomtam.ui.theme.UngDungComTamTheme
 
-class Home : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            UngDungComTamTheme {
-                MyBottomNavigation()
-            }
-        }
-    }
-}
+
 
 @Composable
-fun MyBottomNavigation() {
+fun MyBottomNavigation(navController: NavController) {
     // Giữ trạng thái của tab hiện tại
     val (currentTab, setCurrentTab) = remember { mutableStateOf(0) }
 
@@ -60,7 +54,7 @@ fun MyBottomNavigation() {
             when (currentTab) {
                 0 -> HomeScreen()
                 1 -> FavoritesScreen()
-                2 -> ProfileScreen()
+                2 -> ProfileScreen(navController = navController)
             }
         }
 
@@ -140,71 +134,4 @@ fun FavoritesScreen() {
     }
 }
 
-@Composable
-fun ProfileScreen() {
-    // Nội dung của màn hình profile
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color(0xFF312C2C))
-    ) {
 
-        HeaderScreen(title = "Quản lý")
-        Spacer(modifier = Modifier.size(20.dp))
-        Column {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-
-
-                    .padding(5.dp)
-            ) {
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.logohead),
-                        contentDescription = "Logo",
-                        modifier = Modifier.size(40.dp)
-                    )
-                    Spacer(modifier = Modifier.size(10.dp))
-                    Text(
-                        text = "Quản lý loại món ăn",
-                        fontSize = 20.sp,
-                        color = Color.White
-                    )
-
-                }
-            }
-            //quản lý món ăn
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-
-
-                    .padding(5.dp)
-            ) {
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.logohead),
-                        contentDescription = "Logo",
-                        modifier = Modifier.size(40.dp)
-                    )
-                    Spacer(modifier = Modifier.size(10.dp))
-                    Text(
-                        text = "Quản lý món ăn",
-                        fontSize = 20.sp,
-                        color = Color.White
-                    )
-
-                }
-            }
-
-        }
-    }
-}
