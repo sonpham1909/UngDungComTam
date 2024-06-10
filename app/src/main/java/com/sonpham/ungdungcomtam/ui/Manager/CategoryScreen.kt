@@ -1,6 +1,7 @@
 package com.sonpham.ungdungcomtam.ui.Manager
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -40,7 +41,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.sonpham.ungdungcomtam.R
+import com.sonpham.ungdungcomtam.Screen
 import com.sonpham.ungdungcomtam.model.Category
+import com.sonpham.ungdungcomtam.ui.HeaderScreens.HeaderScreenMan
 import com.sonpham.ungdungcomtam.ui.Home.HeaderScreen
 import com.sonpham.ungdungcomtam.viewModel.CategoryViewModel
 
@@ -60,7 +63,7 @@ fun CategoryManger(viewModel: CategoryViewModel,navController: NavController){
             .fillMaxSize()
             .background(color = Color(0xFF312C2C))
     ) {
-        HeaderScreen(title = "Quản lý loại món ăn")
+        HeaderScreenMan(title = "Quản lý loại món ăn", goBack = {navController.popBackStack()})
         Scaffold(
             floatingActionButton = {
                 FloatingActionButton(
@@ -103,13 +106,19 @@ fun CategoryManger(viewModel: CategoryViewModel,navController: NavController){
                     contentPadding = PaddingValues(10.dp)
                 ) {
                     items(category){
-                        Card(onClick = { /*TODO*/ },
+                        Card(onClick = {
+
+                            navController.navigate("${Screen.detail.name}/${ Uri.encode((it.cid.toString()))}/${Uri.encode(it.nameCategory)}")
+                        },
                             modifier = Modifier
+                                .background(color = Color(0xFF2F2D2D))
                                 .fillMaxWidth()
                                 .padding(5.dp),
                             elevation = CardDefaults.cardElevation(4.dp)) {
                             Column(
-                                modifier = Modifier.padding(14.dp)
+                                modifier = Modifier.fillMaxWidth().background(color = Color(0xFF2F2D2D))
+                                .padding(14.dp)
+
                             ) {
                                 Text(
                                     text = "ID: " + it.cid,

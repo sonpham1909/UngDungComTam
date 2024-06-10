@@ -6,15 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.sonpham.ungdungcomtam.dao.CategoryDao
+import com.sonpham.ungdungcomtam.dao.FoodDao
 import com.sonpham.ungdungcomtam.model.Category
+import com.sonpham.ungdungcomtam.model.Food
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@Database(entities = [Category::class], version = 1)
+@Database(entities = [Category::class,Food::class], version = 3)
 abstract class CategoryDB: RoomDatabase() {
     abstract fun productDao(): CategoryDao
+    abstract fun foodDao(): FoodDao
 
     companion object {
 
@@ -29,22 +32,8 @@ abstract class CategoryDB: RoomDatabase() {
                         context.applicationContext,
                         CategoryDB::class.java,
                         "ComTam"
-                    ).addCallback(object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            // Thêm dữ liệu mặc định khi cơ sở dữ liệu được tạo
-                            // Ví dụ:
-                            CoroutineScope(Dispatchers.IO).launch {
-                                val categoryDao = INTANCE?.productDao()
-                                categoryDao?.insertCategory(Category(nameCategory = "Category 1"))
-                                categoryDao?.insertCategory(Category(nameCategory = "Category 2"))
-                                delay(2000)
-                                // Truy vấn dữ liệu và cập nhật UI
-                                val categories = categoryDao?.getAllCategories()
-                                // Thêm các dòng dữ liệu khác tùy thuộc vào nhu cầu của bạn
-                            }
-                        }
-                    }).build()
+                    ).
+                    fallbackToDestructiveMigration().build()
                 }
                 return intance
             }

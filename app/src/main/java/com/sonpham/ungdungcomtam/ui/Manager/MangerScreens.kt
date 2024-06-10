@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,18 +39,20 @@ fun ProfileScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color(0xFF312C2C))
-            .clickable {
-                navController.navigate(Screen.Category.name)
-            }
+
 
     ) {
 
         HeaderScreen(title = "Quản lý")
         Spacer(modifier = Modifier.size(20.dp))
         Column {
-            Box(
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .background(color = Color(0xFF312C2C))
+                    .clickable {
+                        navController.navigate(Screen.Category.name)
+                    }
 
 
                     .padding(5.dp)
@@ -74,9 +77,11 @@ fun ProfileScreen(navController: NavController) {
             }
             //quản lý món ăn
 
-            Box(
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .background(color = Color(0xFF312C2C))
+                    .clickable { navController.navigate(Screen.foodmanager.name) }
 
 
                     .padding(5.dp)

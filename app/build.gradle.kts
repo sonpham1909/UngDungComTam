@@ -81,6 +81,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-auth-ktx")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation ("com.google.accompanist:accompanist-coil:0.13.0")
 
 
 }
