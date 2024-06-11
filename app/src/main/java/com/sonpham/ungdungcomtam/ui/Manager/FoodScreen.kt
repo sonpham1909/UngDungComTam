@@ -3,6 +3,7 @@ package com.sonpham.ungdungcomtam.ui.Manager
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -25,6 +26,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -53,6 +55,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Observer
@@ -76,10 +79,31 @@ fun FoodScreen(navController: NavController,
 
                ){
     val context = LocalContext.current
+    var id by remember {
+        mutableStateOf("")
+    }
+    var name by remember {
+        mutableStateOf("")
+    }
+    var price by remember {
+        mutableStateOf("")
+    }
+    var cateId by remember {
+        mutableStateOf("")
+    }
+    var imageVl by remember {
+        mutableStateOf("")
+    }
+    val emty by remember {
+        mutableStateOf("")
+    }
 
 
 
     val food by viewModel.food.collectAsState(initial = emptyList())
+    var showDelDialog by remember {
+        mutableStateOf(false)
+    }
 
 
 
@@ -104,7 +128,7 @@ Scaffold (
     floatingActionButton = {
         FloatingActionButton(
             onClick = {
-             navController.navigate(Screen.addfood.name)
+             navController.navigate(Screen.add2.name)
 
 
 
@@ -209,8 +233,22 @@ Scaffold (
                               color = Color.Red)
 
                       }
-                        Icon(painter = painterResource(id = R.drawable.edit_ic), contentDescription = "edit")
-                        Icon(painter = painterResource(id = R.drawable.del_ic), contentDescription = "del")
+                        Icon(painter = painterResource(id = R.drawable.edit_ic), contentDescription = "edit", modifier = Modifier.clickable {
+                            showDelDialog = true
+                            id = it.id.toString()
+                            name = it.nameFood.toString()
+                            price = it.price.toString()
+                            cateId = it.categoryId.toString()
+                            imageVl = it.image.toString()
+                        })
+                        Icon(painter = painterResource(id = R.drawable.del_ic), contentDescription = "del", modifier =  Modifier.clickable {
+                            navController.navigate("${Screen.addfood.name}/${ Uri.encode((it.id.toString()))}/${Uri.encode(it.nameFood)}/${Uri.encode(it.price.toString())}/${Uri.encode(it.categoryId.toString())}/${Uri.encode(
+                                it.image.toString()
+                            )}")
+                        })
+
+
+
 
 
 
@@ -223,8 +261,65 @@ Scaffold (
 
         }
     }
+
+    if (showDelDialog) {
+        AlertDialog(
+            onDismissRequest = { showDelDialog = false },
+            dismissButton = {
+                Button(
+                    onClick = {
+                        showDelDialog = false
+                        id = emty
+                        name= emty
+                        price =emty
+                        cateId = emty
+                        imageVl = emty
+
+                    }
+                ) {
+                    Text(text = "No")
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        if (id != null) {
+                            viewModel.deleteFood(
+                                Food(
+                                    id.toInt(),
+                                   name,
+                                    price.toDouble(),
+                                    cateId.toInt(),
+                                    imageVl.toByteArray()
+                                )
+                            )
+
+                        }
+                        showDelDialog = false
+
+                    }
+                ) {
+                    Text(text = "Yes")
+                }
+            },
+            title = {
+                Text(
+                    text = "Delete student",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp
+                )
+            },
+            text = {
+                Text(
+                    text = "Are you sure?",
+                    fontSize = 25.sp
+                )
+            }
+        )
+    }
+
 }
-            
+
 
 
 
@@ -236,16 +331,27 @@ Scaffold (
 
 @Composable
 fun add(navController: NavController,viewModel: CategoryViewModel,
+        id: Int?,
+        nameF: String?,
+        priceF: Double?,
+        cateId: Int?,
+        image: ByteArray?
+
        ) {
+    val context = LocalContext.current
     var name by remember {
         mutableStateOf("")
     }
     var price by remember {
         mutableStateOf("")
     }
+    val emty by remember {
+        mutableStateOf("")
+    }
     val categories by viewModel.category.collectAsState(initial = emptyList())
     var imageBytes by remember { mutableStateOf<ByteArray?>(null) }
     var selectedCategory by remember { mutableStateOf(categories.firstOrNull() ?: Category(0, "")) }
+
 
     Column(
         modifier = Modifier
@@ -294,15 +400,29 @@ fun add(navController: NavController,viewModel: CategoryViewModel,
         )
         Spacer(modifier = Modifier.height(28.dp))
         Button(onClick = { /*TODO*/
-            viewModel.addFood(
-                Food(
-                    0,
-                    name,
-                    price.toDouble(),
-                    selectedCategory.cid,
-                    imageBytes
-                )
-            )
+           if (id != null){
+               val newFood = Food(id!!.toInt(),name, price.toDouble(),selectedCategory.cid,imageBytes)
+               viewModel.updateFood(
+                  newFood
+               )
+               Toast.makeText(context,"Update Success",Toast.LENGTH_SHORT).show()
+           }else{
+               viewModel.addFood(
+                   Food(
+                       0,
+                       name,
+                       price.toDouble(),
+                       selectedCategory.cid,
+                       imageBytes
+                   )
+               )
+               Toast.makeText(context,"Add food Success",Toast.LENGTH_SHORT).show()
+
+           }
+
+
+
+
             navController.popBackStack()
         }) {
             Text(text = "Save")

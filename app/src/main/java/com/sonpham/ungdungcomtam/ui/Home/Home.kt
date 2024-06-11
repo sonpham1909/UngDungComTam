@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -24,6 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -53,8 +56,10 @@ fun MyBottomNavigation(navController: NavController) {
         Box(modifier = Modifier.weight(1f)) {
             when (currentTab) {
                 0 -> HomeScreen()
-                1 -> FavoritesScreen()
+                1 -> HomeScreen()
                 2 -> ProfileScreen(navController = navController)
+                3 -> FavoritesScreen()
+
             }
         }
 
@@ -106,6 +111,7 @@ fun HeaderScreen(title:String){
    }
 
 }
+
 @Composable
 fun HomeScreen() {
     // Nội dung của màn hình home
@@ -116,10 +122,203 @@ fun HomeScreen() {
    ) {
 
        HeaderScreen(title = "Trang chủ")
+       Spacer(modifier = Modifier.size(20.dp))
+
+       Text(text = "Today: 19 - 05 - 2023",
+           fontSize = 18.sp,
+           fontWeight = FontWeight.Bold,
+           color = Color.White,
+           modifier =  Modifier.align(Alignment.CenterHorizontally)
+       )
+       Text(text = "Số lượng đơn: 2",
+           fontSize = 18.sp,
+           fontWeight = FontWeight.Bold,
+           color = Color.White,
+           modifier =  Modifier.align(Alignment.CenterHorizontally)
+       )
+       Row (
+           modifier = Modifier.align(Alignment.CenterHorizontally)
+       ){
+           Text(text = "Doanh Thu: ",
+               fontSize = 18.sp,
+               fontWeight = FontWeight.Bold,
+               color = Color.White,
+
+           )
+           Text(text = "320000 k",
+               fontSize = 18.sp,
+               fontWeight = FontWeight.Bold,
+               color = Color.Red,
+
+           )
+       }
+       Spacer(modifier = Modifier.size(20.dp))
+       Card(
+           modifier = Modifier
+               .background(color = Color(0xFF2F2D2D))
+               .fillMaxWidth()
+               .padding(8.dp)
+       ){
+           Column (
+               modifier = Modifier
+                   .background(color = Color(0xFF2F2D2D))
+                   .fillMaxWidth()
+                   .padding(8.dp)
+           ){
+              Row {
+                  Text(text = "Đơn hàng CT235235",
+                      fontSize = 15.sp,
+                      fontWeight = FontWeight.Bold,
+                      color = Color.White,
+
+                      )
+                  Spacer(modifier = Modifier.size(32.dp))
+                  Text(text = "||",
+                      fontSize = 20.sp,
+                      fontWeight = FontWeight.Bold,
+                      color = Color.White,
+
+                      )
+                  Spacer(modifier = Modifier.size(32.dp))
+                  Text(text = "130000 K",
+                      fontSize = 15.sp,
+                      fontWeight = FontWeight.Bold,
+                      color = Color.White,
+
+                      )
+              }
+               Spacer(modifier = Modifier.size(12.dp))
+              Row{
+                  Text(text = "Trạng thái",
+                      fontSize = 15.sp,
+                      fontWeight = FontWeight.Bold,
+                      color = Color.White,
+
+                      )
+                  Spacer(modifier = Modifier.width(170.dp))
+                  Text(text = "Từ chối",
+                      fontSize = 15.sp,
+                      fontWeight = FontWeight.Bold,
+                      color = Color.Red
+
+                  )
+              }
+           }
+
+
+       }
+       Card(
+           modifier = Modifier
+               .background(color = Color(0xFF2F2D2D))
+               .fillMaxWidth()
+               .padding(8.dp)
+       ){
+           Column (
+               modifier = Modifier
+                   .background(color = Color(0xFF2F2D2D))
+                   .fillMaxWidth()
+                   .padding(8.dp)
+           ){
+               Row {
+                   Text(text = "Đơn hàng CT235235",
+                       fontSize = 15.sp,
+                       fontWeight = FontWeight.Bold,
+                       color = Color.White,
+
+                       )
+                   Spacer(modifier = Modifier.size(32.dp))
+                   Text(text = "||",
+                       fontSize = 20.sp,
+                       fontWeight = FontWeight.Bold,
+                       color = Color.White,
+
+                       )
+                   Spacer(modifier = Modifier.size(32.dp))
+                   Text(text = "130000 K",
+                       fontSize = 15.sp,
+                       fontWeight = FontWeight.Bold,
+                       color = Color.White,
+
+                       )
+               }
+               Spacer(modifier = Modifier.size(12.dp))
+               Row{
+                   Text(text = "Trạng thái",
+                       fontSize = 15.sp,
+                       fontWeight = FontWeight.Bold,
+                       color = Color.White,
+
+                       )
+                   Spacer(modifier = Modifier.width(170.dp))
+                   Text(text = "Từ chối",
+                       fontSize = 15.sp,
+                       fontWeight = FontWeight.Bold,
+                       color = Color.Red
+
+                   )
+               }
+           }
+
+
+       }
+       Card(
+           modifier = Modifier
+               .background(color = Color(0xFF2F2D2D))
+               .fillMaxWidth()
+               .padding(8.dp)
+       ){
+           Column (
+               modifier = Modifier
+                   .background(color = Color(0xFF2F2D2D))
+                   .fillMaxWidth()
+                   .padding(8.dp)
+           ){
+               Row {
+                   Text(text = "Đơn hàng CT235235",
+                       fontSize = 15.sp,
+                       fontWeight = FontWeight.Bold,
+                       color = Color.White,
+
+                       )
+                   Spacer(modifier = Modifier.size(32.dp))
+                   Text(text = "||",
+                       fontSize = 20.sp,
+                       fontWeight = FontWeight.Bold,
+                       color = Color.White,
+
+                       )
+                   Spacer(modifier = Modifier.size(32.dp))
+                   Text(text = "130000 K",
+                       fontSize = 15.sp,
+                       fontWeight = FontWeight.Bold,
+                       color = Color.White,
+
+                       )
+               }
+               Spacer(modifier = Modifier.size(12.dp))
+               Row{
+                   Text(text = "Trạng thái",
+                       fontSize = 15.sp,
+                       fontWeight = FontWeight.Bold,
+                       color = Color.White,
+
+                       )
+                   Spacer(modifier = Modifier.width(170.dp))
+                   Text(text = "Từ chối",
+                       fontSize = 15.sp,
+                       fontWeight = FontWeight.Bold,
+                       color = Color.Red
+
+                   )
+               }
+           }
+
+
+       }
 
    }
 }
-
+@Preview
 @Composable
 fun FavoritesScreen() {
     // Nội dung của màn hình favorites
@@ -129,9 +328,60 @@ fun FavoritesScreen() {
             .background(color = Color(0xFF312C2C))
     ) {
 
-        HeaderScreen(title = "Thống kê")
+        HeaderScreen(title = "Hỗ trợ")
+        Row (
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Image(painter = painterResource(id = R.drawable.imgzalo), contentDescription = "Zalo",
+                modifier = Modifier.size(70.dp))
+            Text(text = "09673534f4",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+
+                )
+
+        }
+
+        Spacer(modifier = Modifier.size(12.dp))
+        Row (
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Image(painter = painterResource(id = R.drawable.imggmail), contentDescription = "Zalo",
+                modifier = Modifier.size(70.dp))
+            Text(text = "09673534f4",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+
+                )
+
+        }
+        Spacer(modifier = Modifier.size(12.dp))
+        Row (
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Image(painter = painterResource(id = R.drawable.imghotline), contentDescription = "Zalo",
+                modifier = Modifier.size(70.dp))
+            Text(text = "09673534f4",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+
+                )
+
+        }
+
 
     }
+}
+
+@Composable
+fun User(){
+
 }
 
 

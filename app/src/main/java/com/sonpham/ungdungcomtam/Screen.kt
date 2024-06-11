@@ -31,7 +31,8 @@ enum class Screen {
     manager,
     detail,
     foodmanager,
-    addfood
+    addfood,
+    add2
 }
 
 @Composable
@@ -72,8 +73,23 @@ fun AppNavHost() {
             FoodScreen(navController= navController, viewModel = categoryViewModel
             )
         }
-        composable(Screen.addfood.name){
-            add(navController= navController, viewModel = categoryViewModel
+        composable( "${Screen.addfood.name}/{id}/{nameFood}/{price}/{categoryId}/{image}"){
+            add(navController= navController, viewModel = categoryViewModel,
+                id = it.arguments?.getInt("id"),
+                nameF = it.arguments?.getString("nameFood"),
+                priceF = it.arguments?.getDouble("price"),
+                cateId = it.arguments?.getInt("categoryId"),
+                image = it.arguments?.getByteArray("image")
+            )
+        }
+
+        composable(Screen.add2.name){
+            add(navController= navController, viewModel = categoryViewModel,
+                id= null,
+                nameF = null,
+                priceF = null,
+                cateId = null,
+                image = null
             )
         }
 
